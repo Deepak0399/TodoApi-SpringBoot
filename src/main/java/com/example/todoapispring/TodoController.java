@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/todos")
 public class TodoController {
+    private static final String TODO_NOT_FOUND = "Todo not found";
     private static List<Todo> todoList;
     public TodoController() {
         todoList = new ArrayList<>();
@@ -35,12 +36,12 @@ public class TodoController {
 //        return newTodo;
 //    }
     @GetMapping("/{todoId}")
-    public ResponseEntity<Todo> getTodoById(@PathVariable long todoId) {
+    public ResponseEntity<?> getTodoById(@PathVariable long todoId) {
         for (Todo todo : todoList) {
             if (todo.getId() == todoId) {
                 return ResponseEntity.ok(todo);
             }
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(TODO_NOT_FOUND);
     }
 }
