@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/todos")
 public class TodoController {
     private static List<Todo> todoList;
     public TodoController() {
@@ -15,11 +16,11 @@ public class TodoController {
         todoList.add(new Todo(1,false,"Todo 1", 1));
         todoList.add(new Todo(2,true,"Todo 2", 2));
     }
-    @GetMapping("/todos")
+    @GetMapping
     public ResponseEntity<List<Todo>> getTodos() {
         return ResponseEntity.ok(todoList);
     }
-    @PostMapping("/todos")
+    @PostMapping
     /*
        we can use this annotation to set the status code     @ResponseStatus(HttpStatus.CREATED)
      */
@@ -33,7 +34,7 @@ public class TodoController {
 //        todoList.add(newTodo);
 //        return newTodo;
 //    }
-    @GetMapping("/todos/{todoId}")
+    @GetMapping("/{todoId}")
     public ResponseEntity<Todo> getTodoById(@PathVariable long todoId) {
         for (Todo todo : todoList) {
             if (todo.getId() == todoId) {
