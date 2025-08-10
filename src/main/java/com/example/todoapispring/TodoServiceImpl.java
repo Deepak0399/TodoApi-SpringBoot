@@ -5,8 +5,13 @@ import org.springframework.stereotype.Service;
 
 @Service("todoService")
 public class TodoServiceImpl implements TodoService {
+    @TimeMonitor
     @Override
+    //join point
     public String doSomething() {
-        return"Something";
+        for (long i = 0; i < 1000000000L; i++) {
+            //....
+        }
+        return"Something from TodoService";
     }
 }

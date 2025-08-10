@@ -29,7 +29,7 @@ public class TodoController {
     }
     @GetMapping
     public ResponseEntity<List<Todo>> getTodos(@RequestParam (required = false) Boolean isCompleted) {
-        System.out.println(isCompleted + this.todoService.doSomething()+" & "+ this.todoService2.doSomething());
+        System.out.println(isCompleted +" -> "+ this.todoService.doSomething());
         return ResponseEntity.ok(todoList);
     }
     @PostMapping
